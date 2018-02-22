@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
  * Basic tests for in-memory address book implementation.
  * Created by simon on 22/02/18.
  */
-public class AddressBookInMemoryImplTest {
+public class ContactInMemoryImplTest {
 
     private static final String EXPECTED_NAME = "Simon Ritchie";
     private static final Gender EXPECTED_GENDER = Gender.MALE;

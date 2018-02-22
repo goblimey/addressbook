@@ -3,6 +3,8 @@ package com.goblimey.addressbook;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import static org.junit.Assert.*;
@@ -146,6 +148,34 @@ public class AddressBookTest {
 
         int size = book.size();
         assertEquals(0, size);
+    }
 
+    @Test
+    public void import_test() throws Exception {
+        List<String> lines = new ArrayList<String>();
+        lines.add("Bill McKnight, Male, 16/03/77\n");
+        lines.add("Paul Robinson,Male,15/01/85\n");
+        lines.add(" Gemma Lane,  Female ,  20/11/91 \n");
+        lines.add("Sarah Stone, Female, 20/09/80\n");
+        lines.add("Wes Jackson, Male, 14/08/74");
+        book = new AddressBook();
+        book.importContacts(lines);
+        List<Contact> contacts = book.getAllContacts();
+
+        assertEquals("Bill McKnight", contacts.get(0).getName());
+        assertEquals(Gender.MALE, contacts.get(0).getGender());
+        DateFormat df = new SimpleDateFormat("dd/MM/yy");
+        Calendar cal = new GregorianCalendar();
+        cal.setTime(contacts.get(0).getDOB());
+        assertEquals(16, cal.get(Calendar.DAY_OF_MONTH));
+        assertEquals(2, cal.get(Calendar.MONTH));   // months run 0-11
+        assertEquals(1977, cal.get(Calendar.YEAR));
+
+        assertEquals("Gemma Lane", contacts.get(2).getName());
+        assertEquals(Gender.MALE, contacts.get(2).getGender());
+        cal.setTime(contacts.get(2).getDOB());
+        assertEquals(20, cal.get(Calendar.DAY_OF_MONTH));
+        assertEquals(10, cal.get(Calendar.MONTH));
+        assertEquals(1991, cal.get(Calendar.YEAR));
     }
 }

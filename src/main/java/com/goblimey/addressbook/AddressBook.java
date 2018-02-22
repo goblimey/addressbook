@@ -1,7 +1,12 @@
 package com.goblimey.addressbook;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 /**
  * Created by simon on 22/02/18.
@@ -25,6 +30,42 @@ public class AddressBook {
      */
     public void addContact(Contact contact) {
         book.add(contact);
+    }
+
+    /**
+     * Import contacts as a list of text.
+     * @param lines the list of lines.
+     */
+    public void importContacts(List<String> lines) throws ParseException{
+        // Example: "Steven O'Reilly-Smith, Male, 16/03/77"
+        for (String line: lines) {
+            String[] token = line.split(",");
+            if (token.length != 3) {
+                String message = String.format("illegal input: expected 3 comma-separated field, got %d",
+                        Integer.toString(token.length));
+                throw new ParseException(message, 0);
+            }
+            token[0] = token[0].trim();
+            String genderStr = token[1].trim();
+            Gender gender = null;
+            if ("Male".equalsIgnoreCase(genderStr)) {
+                gender = Gender.MALE;
+            } else if (("Female".equalsIgnoreCase(genderStr))) {
+                gender = Gender.MALE;
+            } else {
+                String message = String.format("illegal input: expected Male or Female, got %s",
+                        genderStr);
+                throw new ParseException(message, 0);
+            }
+            /*
+             * SimpleDateFormat interprets the year relative to the current year - see the API
+              * doc for the precise rules, but in 2018, "77" is 1977 and "16" is 2016.
+             */
+            DateFormat df = new SimpleDateFormat("dd/MM/yy");
+            Date dob = df.parse(token[2].trim());   // throws ParseException.
+
+            book.add(new ContactInMemoryImpl(token[0], gender, dob));
+        }
     }
 
     /**

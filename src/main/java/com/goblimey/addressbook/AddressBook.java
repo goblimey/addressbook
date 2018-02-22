@@ -51,6 +51,21 @@ public class AddressBook {
     }
 
     /**
+     * Get the oldest contact.  If two contacts have the same age,
+     * return the first found.
+     * @return the oldest contact.
+     */
+    public Contact getOldestContact() {
+        Contact oldestContact = book.get(0);
+        for (Contact contact: book) {
+            if (contact.getDOB().before(oldestContact.getDOB())) {
+                oldestContact = contact;
+            }
+        }
+        return oldestContact;
+    }
+
+    /**
      * Get the number of contacts in the book.
      * @return the number of contacts.
      */

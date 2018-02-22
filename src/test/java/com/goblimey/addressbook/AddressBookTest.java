@@ -97,4 +97,55 @@ public class AddressBookTest {
 
         assertEquals(c2, contact);
     }
+
+    @Test
+    public void getContactsByName_test() throws Exception {
+        List<Contact> list = book.getContactsByName(EXPECTED_NAME2);
+        assertEquals(1, list.size());
+        assertEquals(contact2, list.get(0));
+    }
+
+    @Test
+    public void getContactsByNameWithSomeNamesEqual_test() throws Exception {
+        /*
+         * The standard data won't do for this test.  We want two contacts with the
+         * same name.
+         */
+
+        book = new AddressBook();
+        Contact c1 = new ContactInMemoryImpl(EXPECTED_NAME1, EXPECTED_GENDER1, expected_DOB1);
+        book.addContact(c1);
+        Contact c2 = new ContactInMemoryImpl(EXPECTED_NAME2, EXPECTED_GENDER2, expected_DOB2);
+        book.addContact(c2);
+        Contact c3 = new ContactInMemoryImpl(EXPECTED_NAME2, EXPECTED_GENDER3, expected_DOB3);
+        book.addContact(c3);
+        List<Contact> list = book.getContactsByName(EXPECTED_NAME2);
+
+        assertEquals(c2, list.get(0));
+        assertEquals(c3, list.get(1));
+    }
+
+    @Test
+    public void emptyBook_test() throws Exception {
+        /*
+         * Check that all get methods return sensible results with an empty book.
+         */
+
+        book = new AddressBook();
+        List<Contact> list = book.getAllContacts();
+        assertEquals(0, list.size());
+
+        list = book.getContactsByName(EXPECTED_NAME2);
+        assertEquals(0, list.size());
+
+        list = book.getContactsByGender(EXPECTED_GENDER1);
+        assertEquals(0, list.size());
+
+        Contact contact = book.getOldestContact();
+        assertNull(contact);
+
+        int size = book.size();
+        assertEquals(0, size);
+
+    }
 }

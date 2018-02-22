@@ -17,7 +17,7 @@ public class AddressBookInMemoryImplTest {
 
     @Test
     public void constructor_test() throws Exception {
-        AddressBook book = new AddressBookInMemoryImpl(EXPECTED_NAME, EXPECTED_GENDER, new Date());
+        Contact book = new ContactInMemoryImpl(EXPECTED_NAME, EXPECTED_GENDER, new Date());
 
         assertEquals(EXPECTED_NAME, book.getName());
         assertEquals(EXPECTED_GENDER, book.getGender());
@@ -26,7 +26,7 @@ public class AddressBookInMemoryImplTest {
 
     @Test
     public void getter_setter_test() throws Exception {
-        AddressBook book = new AddressBookInMemoryImpl();
+        Contact book = new ContactInMemoryImpl();
         book.setName(EXPECTED_NAME);
         book.setGender(EXPECTED_GENDER);
         book.setDOB(new Date());

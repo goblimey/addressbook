@@ -5,15 +5,18 @@ import java.util.Date;
 /**
  * Created by simon on 22/02/18.
  */
-public class AddressBookInMemoryImpl implements AddressBook {
+public class ContactInMemoryImpl implements Contact {
 
     String name;
     Gender gender;
     Date dob;
 
-    public AddressBookInMemoryImpl() {}
+    public ContactInMemoryImpl() {
+        super();
+    }
 
-    public AddressBookInMemoryImpl(String name, Gender gender, Date dob) {
+    public ContactInMemoryImpl(String name, Gender gender, Date dob) {
+        super();
         this.name = name;
         this.gender = gender;
         this.dob = dob;
@@ -51,7 +54,7 @@ public class AddressBookInMemoryImpl implements AddressBook {
 
     @Override
     public String toString() {
-        return "AddressBookInMemoryImpl{" +
+        return "ContactInMemoryImpl{" +
                 "name='" + name + '\'' +
                 ", gender=" + gender +
                 ", dob=" + dob +

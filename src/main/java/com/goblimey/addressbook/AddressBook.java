@@ -51,7 +51,7 @@ public class AddressBook {
             if ("Male".equalsIgnoreCase(genderStr)) {
                 gender = Gender.MALE;
             } else if (("Female".equalsIgnoreCase(genderStr))) {
-                gender = Gender.MALE;
+                gender = Gender.FEMALE;
             } else {
                 String message = String.format("illegal input: expected Male or Female, got %s",
                         genderStr);

@@ -172,10 +172,13 @@ public class AddressBookTest {
         assertEquals(1977, cal.get(Calendar.YEAR));
 
         assertEquals("Gemma Lane", contacts.get(2).getName());
-        assertEquals(Gender.MALE, contacts.get(2).getGender());
+        assertEquals(Gender.FEMALE, contacts.get(2).getGender());
         cal.setTime(contacts.get(2).getDOB());
         assertEquals(20, cal.get(Calendar.DAY_OF_MONTH));
         assertEquals(10, cal.get(Calendar.MONTH));
         assertEquals(1991, cal.get(Calendar.YEAR));
+
+        contacts = book.getContactsByGender(Gender.MALE);
+        assertEquals(3, contacts.size());
     }
 }

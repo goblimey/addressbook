@@ -39,7 +39,7 @@ For a very large data set, such as the address book for a email system, you woul
 noSQL or SQL depending upon whether you needed relations between contacts.
 A database would also give you resiliance.
 
-Test coverage is fairly good, but there are no tests fthat check the import method handling illegal input.
+Test coverage is fairly good, but there are no tests that check the import method handling illegal input.
 
 With more time I would run findbugs and jacoco as part of the gradle build.
 
